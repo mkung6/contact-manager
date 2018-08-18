@@ -1,0 +1,28 @@
+<div class="invoice-content">
+    <div class="table-head table-row" ng-if="rows.length > 0">
+        <!-- -->
+    </div>
+
+    <loading-collection collection="rows" ng-if="rows.length > 0" show-check="false"></loading-collection>
+
+    <div ng-repeat="row in rows" class="table-row" ng-class="{'dismissed-entry-info': row.dismissed}">
+        <!-- -->
+        <div class="table-item text-grow">
+            <!-- -->
+            <span ng-if="needsToContactManager(row)">
+                <i class="fa fa-flag"
+                   aria-hidden="true"
+                   ng-if="!row.managerContacted"
+                   title="{{::row.isOverdue?'This user\'s timesheet has not been approved. Click contact manager to send an automated email to their manager.':'Needs Approval'}}"></i>
+                <i class="fa fa-check"
+                   aria-hidden="true"
+                   ng-if="row.managerContacted"
+                   title="Sent"></i>
+                <a ng-if="!row.managerContacted" ng-click="contactManager(row)" title="{{::row.isOverdue?'This user\'s timesheet has not been approved. Click contact manager to send an automated email to their manager.':'Needs Approval'}}">Contact Manager</a>
+                <div ng-if="row.managerContacted">Manager Contacted</div>
+            </span>
+        </div>
+        <div class="table-item"></div>
+    </div>
+
+</div>
